@@ -12,12 +12,12 @@ const recipeSchema = new Schema({
     type: String, required: true
   },
   author: {
-    type: mongoose.Scheema.Type.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true
   },
   comments: [{
-    type: mongoose.Schema.Type.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'Comment'
   }]
 });
