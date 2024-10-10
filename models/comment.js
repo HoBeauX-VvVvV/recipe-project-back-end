@@ -5,11 +5,11 @@ const commentSchema = new Schema({
   text: {
     type: String, required: true
   },
-  author: { type: mongoose.Schema.Type.ObjectId,
+  author: { type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     reequired: true
   },
-  recipe: { type: mongoose.Schema.Type.ObjectId,
+  recipe: { type: mongoose.Schema.Types.ObjectId,
     ref: 'Comment',
     required: true
   }  

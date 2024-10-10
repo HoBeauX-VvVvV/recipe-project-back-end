@@ -8,7 +8,7 @@ const recipeRouter = require('./controllers/recipes.js')
 mongoose.connect(process.env.MONGODB_URI);
 
 mongoose.connection.on('connected', () => {
-  console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
+  console.log(`We in the house @ MongoDB: ${mongoose.connection.name}.`);
 });
 
 app.use(express.json());
@@ -19,5 +19,5 @@ app.use('/recipes', recipeRouter);
 
 
 app.listen(3000, () => {
-  console.log('The express app is ready!');
+  console.log('Express is rockin!');
 });

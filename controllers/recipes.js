@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Recipe = require('../models/recipe.js');
 const verifyToken = require('../middleware/verify-token.js');
+const commentRouter = require('./comments.js');
 
 // CEATE 
 router.post('/', verifyToken, async (req, res) => {
@@ -80,5 +81,7 @@ router.delete('/:recipeId', verifyToken, async (req, res) => {
     }
   });
   
-  
+router.use('/:recipeId/comments', commentRouter);
+
+
 module.exports = router
