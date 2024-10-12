@@ -5,6 +5,7 @@ const app = express();
 const mongoose = require('mongoose');
 const userRouter = require('./controllers/users.js');
 const recipeRouter = require('./controllers/recipes.js')
+const cors = require('cors')
 mongoose.connect(process.env.MONGODB_URI);
 
 mongoose.connection.on('connected', () => {
@@ -12,8 +13,9 @@ mongoose.connection.on('connected', () => {
 });
 
 app.use(express.json());
+app.use(cors());
 
-// Routes go here
+
 app.use('/users', userRouter)
 app.use('/recipes', recipeRouter);
 

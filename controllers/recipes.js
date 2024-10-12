@@ -34,7 +34,11 @@ router.get('/', async (req, res) => {
 // SHOW
 router.get('/:recipeId', async (req, res) => {
     try {
-      const recipe = await Recipe.findById(req.params.recipeId).populate('author', 'username');
+      const recipe = await Recipe.findById(req.params.recipeId).populate('author', 'username')
+      .populate({
+        path: 'comments',
+        populate: { path: 'author', select: 'username' }
+      });
       if (!recipe) return res.status(404).json({ error: 'Recipe not found' });
       res.status(200).json(recipe);
     } catch (error) {
