@@ -56,7 +56,6 @@ router.put('/:recipeId', verifyToken, async (req, res) => {
       }
       recipe.title = req.body.title || recipe.title;
       recipe.ingredients = req.body.ingredients || recipe.ingredients;
-      recipe.instructions = req.body.instructions || recipe.instructions;
       const updatedRecipe = await recipe.save();
       res.status(200).json(updatedRecipe);
     } catch (error) {
