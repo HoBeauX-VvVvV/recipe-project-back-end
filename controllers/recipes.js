@@ -48,20 +48,19 @@ router.get('/:recipeId', async (req, res) => {
   
 // EDIT
 router.put('/:recipeId', verifyToken, async (req, res) => {
-    try {
-      const recipe = await Recipe.findById(req.params.recipeId);
-      if (!recipe) return res.status(404).json({ error: 'Recipe not found' });
-      if (recipe.author.toString() !== req.user._id.toString()) {
-        return res.status(403).json({ error: 'Not authorized to update this recipe' });
-      }
-      recipe.title = req.body.title || recipe.title;
-      recipe.ingredients = req.body.ingredients || recipe.ingredients;
-      const updatedRecipe = await recipe.save();
-      res.status(200).json(updatedRecipe);
-    } catch (error) {
-      res.status(500).json({ error: error.message });
+  try {
+    const recipe = await Recipe.findById(req.params.recipeId);
+    if (!recipe) return res.status(404).json({ error: 'Recipe not found' });
+    if (recipe.author.toString() !== req.user._id) {
+      return res.status(403).json({ error: 'Not authorized to edit this recipe' });
     }
-  });
+    Object.assign(recipe, req.body);
+    await recipe.save();
+    res.status(200).json(recipe);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
   
 // DELETE
 router.delete('/:recipeId', verifyToken, async (req, res) => {
